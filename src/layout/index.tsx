@@ -22,11 +22,11 @@ const Layout:React.FC = () => {
       </Sider>
       <AntdLayout>
         <Header
-          style={{background:colorBgContainer}}
+          style={{background:colorBgContainer, padding:'0 16px'}}
         >
           <CustomHeader collapsed={collapsed} onCollapsed={setCollapsed}></CustomHeader>
         </Header>
-        <Content style={{margin: '24px 16px 0', padding: 24}}>
+        <Content style={{margin: '24px 16px 0', padding: 24, background: colorBgContainer}}>
           <CustomContent />
         </Content>
       </AntdLayout>

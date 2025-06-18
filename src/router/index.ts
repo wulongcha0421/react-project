@@ -22,6 +22,15 @@ const router = createBrowserRouter([
       {
         path:'about',
         Component:About
+      },
+      {
+        path:'user',
+        lazy:async () => {
+          const Component = await import('../views/user');
+          return {
+            Component: Component.default
+          }
+        }
       }
     ]
   },

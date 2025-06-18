@@ -1,9 +1,12 @@
 import React from "react"
 import { useNavigate } from "react-router";
-import {Form, Button, Input, message} from 'antd';
 import type { FormProps } from "antd";
-import './index.css';
+import {Form, Button, Input, message} from 'antd';
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import useUserStore from '../../store/user.ts'
+import { useShallow } from "zustand/shallow";
+import './index.css';
+
 
 type FieldType = {
   username?: string;
@@ -13,12 +16,18 @@ type FieldType = {
 const Login:React.FC = () =>{
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
+  const { setUser, setToken } = useUserStore(useShallow((state) => ({
+    setUser: state.setUser,
+    setToken: state.setToken
+  })));
 
   // 提交表单且数据验证成功时的回调函数
   const onFinish:FormProps<FieldType>['onFinish'] = (values) => {
     console.log('Success:', values);
     if(values.username === 'admin' && values.password === '12345') {
       // 模拟登录成功，跳转到首页
+      setUser({ name: values.username, isAccess: true });
+      setToken(values.username + '-token'); // 模拟设置token
       messageApi.open({
         type: 'success',
         content: '登录成功',
