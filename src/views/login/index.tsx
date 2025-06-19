@@ -5,7 +5,7 @@ import {Form, Button, Input, message} from 'antd';
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import useUserStore from '../../store/user.ts'
 import { useShallow } from "zustand/shallow";
-import './index.css';
+import style from './index.module.scss'
 
 
 type FieldType = {
@@ -32,7 +32,7 @@ const Login:React.FC = () =>{
         type: 'success',
         content: '登录成功',
       });
-      navigate('/home');
+      navigate('/home', { replace: true });
     }else{
       messageApi.open({
         type: 'error',
@@ -51,10 +51,10 @@ const Login:React.FC = () =>{
   }
 
   return (
-    <div className="login-container">
+    <div className={style['login-container']}>
       {contextHolder}
-      <div className="login-content">
-        <div className="login-content__title">登 录</div>
+      <div className={style['login-content']}>
+        <div className={style["login-content__title"]}>登 录</div>
         <Form
           name="basic"
           onFinish={onFinish}
